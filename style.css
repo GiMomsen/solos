@@ -1,111 +1,264 @@
-// =========================
-// MUSIC CONTROL
-// =========================
-const musicButton = document.getElementById("musicButton");
-const music = document.getElementById("music");
-let playing = false;
-
-musicButton.addEventListener("click", () => {
-    if (!playing) {
-        music.play().then(() => {
-            musicButton.innerHTML = "Ⅱ";
-            musicButton.classList.add("is-playing");
-            playing = true;
-        }).catch(err => console.log("Áudio bloqueado pelo navegador até interação do usuário."));
-    } else {
-        music.pause();
-        musicButton.innerHTML = "♫";
-        musicButton.classList.remove("is-playing");
-        playing = false;
-    }
-});
-
-// =========================
-// OPTIMIZED LIGHT FOLLOW MOUSE
-// =========================
-const light = document.getElementById("cursorLight");
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
-let lightX = mouseX;
-let lightY = mouseY;
-
-// Apenas atualiza as coordenadas do mouse
-document.addEventListener("mousemove", (event) => {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
-});
-
-// Animação suave usando o hardware do navegador
-function animateLight() {
-    // Efeito de interpolação (lerp) para a luz seguir o mouse com suavidade
-    lightX += (mouseX - lightX) * 0.1;
-    lightY += (mouseY - lightY) * 0.1;
-    
-    light.style.transform = `translate(${lightX}px, ${lightY}px)`;
-    requestAnimationFrame(animateLight);
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-// Inicia a animação apenas se não for dispositivo móvel
-if (window.innerWidth > 768) {
-    animateLight();
+html {
+    scroll-behavior: smooth;
 }
 
-// =========================
-// INTERSECTION OBSERVER (REVEAL)
-// =========================
-const reveals = document.querySelectorAll(".reveal");
+body {
+    font-family: 'Inter', sans-serif;
+    background: #050505;
+    color: #fff;
+    overflow-x: hidden;
+    opacity: 0;
+    animation: fadeInBody 1.5s ease forwards;
+}
 
-const revealOptions = {
-    root: null,
-    threshold: 0.25,
-    rootMargin: "0px 0px -50px 0px"
-};
+/* =========================
+   BACKGROUND
+========================= */
+.background {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, #1d1d1d 0%, #050505 65%);
+    z-index: -5;
+}
 
-const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            // Opcional: descomente a linha abaixo para a animação acontecer apenas uma vez
-            // observer.unobserve(entry.target); 
-        }
-    });
-}, revealOptions);
+/* =========================
+   GRAIN
+========================= */
+.grain {
+    position: fixed;
+    inset: 0;
+    opacity: .04;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    pointer-events: none;
+    z-index: -4;
+}
 
-reveals.forEach(section => {
-    revealObserver.observe(section);
-});
+/* =========================
+   LIGHT FOLLOW
+========================= */
+.light {
+    position: fixed;
+    width: 550px;
+    height: 550px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.06), transparent 70%);
+    pointer-events: none;
+    left: 0;
+    top: 0;
+    z-index: -3;
+    mix-blend-mode: screen;
+    will-change: transform;
+}
 
-// =========================
-// PARALLAX EFFECT ON HERO
-// =========================
-const heroContent = document.querySelector(".hero-content");
+/* =========================
+   MUSIC BUTTON
+========================= */
+#musicButton {
+    position: fixed;
+    right: 45px;
+    top: 35px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(255,255,255,.03);
+    color: white;
+    cursor: pointer;
+    backdrop-filter: blur(18px);
+    transition: .35s;
+    font-size: 20px;
+    z-index: 999;
+}
 
-window.addEventListener("scroll", () => {
-    const scroll = window.scrollY;
-    
-    if (scroll < window.innerHeight) {
-        const opacity = Math.max(1 - (scroll / 500), 0);
-        heroContent.style.opacity = opacity;
-        heroContent.style.transform = `translateY(${scroll * 0.2}px)`;
-    }
-});
+#musicButton:hover {
+    transform: scale(1.12);
+    background: white;
+    color: black;
+}
 
-// =========================
-// FAKE PROGRESS BAR UPDATE
-// =========================
-const progressBar = document.querySelector('.progress-bar');
-const endingSection = document.querySelector('.ending');
+/* =========================
+   HERO
+========================= */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 11vw;
+    max-width: 900px;
+}
 
-const progressObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && progressBar) {
-            setTimeout(() => {
-                progressBar.style.width = "75%"; // Simula a música chegando perto do fim
-            }, 800);
-        } else if (progressBar) {
-            progressBar.style.width = "0%"; // Reseta quando sai da tela
-        }
-    });
-}, { threshold: 0.5 });
+.small {
+    color: #8e8e8e;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeSmall 2s ease 0.5s forwards;
+}
 
-if(endingSection) progressObserver.observe(endingSection);
+.hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(60px, 8vw, 115px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -3px;
+    opacity: 0;
+    animation: fadeTitle 2s ease 0.8s forwards;
+    transition: .45s;
+}
+
+.scroll {
+    margin-top: 90px;
+    color: #666;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 12px;
+    opacity: 0;
+    animation: fadeSmall 2.5s ease 1.2s forwards, floatScroll 3s ease-in-out infinite 1.2s;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8vw;
+}
+
+.text {
+    width: 900px;
+}
+
+.number {
+    color: #444;
+    font-size: 14px;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+}
+
+.text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(50px, 6vw, 90px);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 25px;
+    transition: .45s;
+    max-width: 850px;
+}
+
+.text p {
+    color: #b8b8b8;
+    font-size: 22px;
+    line-height: 1.8;
+    transition: .35s;
+}
+
+/* =========================
+   FINAL
+========================= */
+.ending {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.line {
+    width: 220px;
+    height: 1px;
+    background: #444;
+    margin-bottom: 35px;
+}
+
+.ending p {
+    color: #666;
+    letter-spacing: 4px;
+    margin-bottom: 45px;
+}
+
+.ending h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 70px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.1;
+    transition: .45s;
+}
+
+/* =========================
+   ANIMAÇÕES
+========================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(80px);
+    transition: 1.2s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes fadeInBody { from { opacity: 0; } to { opacity: 1; } }
+
+@keyframes fadeTitle {
+    from { opacity: 0; filter: blur(12px); transform: translateY(40px); }
+    to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+@keyframes fadeSmall {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes floatScroll {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+}
+
+/* =========================
+   HOVER
+========================= */
+h1:hover,
+h2:hover {
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.text p:hover {
+    color: white;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media(max-width:900px) {
+    .hero { padding: 40px; }
+    .hero h1 { font-size: 62px; }
+    .text h2 { font-size: 52px; }
+    .text p { font-size: 18px; }
+    .ending h2 { font-size: 50px; }
+}
+
+@media(max-width:600px) {
+    #musicButton { right: 20px; top: 20px; width: 45px; height: 45px; }
+    .hero { justify-content: center; }
+    .hero h1 { letter-spacing: -1px; }
+    .scroll { margin-top: 50px; }
+    .light { display: none; }
+}
