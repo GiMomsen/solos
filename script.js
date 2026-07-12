@@ -1,224 +1,177 @@
 // =========================
-// PLAY MUSIC
+// MUSIC CONTROL
 // =========================
 
-const playButton = document.getElementById("playButton");
-const music = document.getElementById("bgMusic");
+const musicButton = document.getElementById("musicButton");
+const music = document.getElementById("music");
 
-playButton.addEventListener("click", () => {
+let playing = false;
 
-    music.play();
 
-    playButton.innerHTML = "Playing...";
+musicButton.addEventListener("click", () => {
 
-    playButton.disabled = true;
+    if(!playing){
 
-});
+        music.play();
 
+        musicButton.innerHTML = "Ⅱ";
 
-// =========================
-// CUSTOM CURSOR
-// =========================
+        playing = true;
 
-const cursor = document.querySelector(".cursor");
+    }else{
 
-document.addEventListener("mousemove",(e)=>{
+        music.pause();
 
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
+        musicButton.innerHTML = "♫";
 
-});
-
-
-document.querySelectorAll("button,.card,.hover-glow").forEach(item=>{
-
-    item.addEventListener("mouseenter",()=>{
-
-        cursor.classList.add("active");
-
-    });
-
-    item.addEventListener("mouseleave",()=>{
-
-        cursor.classList.remove("active");
-
-    });
-
-});
-
-
-// =========================
-// SCROLL REVEAL
-// =========================
-
-const observer = new IntersectionObserver(entries=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add("show");
-
-        }
-
-    });
-
-},{threshold:.2});
-
-document.querySelectorAll(".card,.glass,.final-box").forEach(el=>{
-
-    el.classList.add("hidden");
-
-    observer.observe(el);
-
-});
-
-
-// =========================
-// 3D CARD EFFECT
-// =========================
-
-document.querySelectorAll(".hover-card").forEach(card=>{
-
-    card.addEventListener("mousemove",(e)=>{
-
-        const rect = card.getBoundingClientRect();
-
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const rotateY = ((x / rect.width)-0.5)*18;
-        const rotateX = ((y / rect.height)-0.5)*-18;
-
-        card.style.transform = `
-            rotateX(${rotateX}deg)
-            rotateY(${rotateY}deg)
-            scale(1.03)
-        `;
-
-    });
-
-    card.addEventListener("mouseleave",()=>{
-
-        card.style.transform="rotateX(0) rotateY(0)";
-
-    });
-
-});
-
-
-// =========================
-// PARTICLES
-// =========================
-
-const particles = document.getElementById("particles");
-
-for(let i=0;i<90;i++){
-
-    const dot = document.createElement("span");
-
-    dot.classList.add("particle");
-
-    dot.style.left=Math.random()*100+"vw";
-
-    dot.style.top=Math.random()*100+"vh";
-
-    dot.style.animationDuration=(6+Math.random()*12)+"s";
-
-    dot.style.animationDelay=Math.random()*5+"s";
-
-    dot.style.width=(2+Math.random()*4)+"px";
-
-    dot.style.height=dot.style.width;
-
-    particles.appendChild(dot);
-
-}
-
-
-// =========================
-// PARALLAX
-// =========================
-
-document.addEventListener("mousemove",(e)=>{
-
-    const x=(window.innerWidth/2-e.clientX)/60;
-
-    const y=(window.innerHeight/2-e.clientY)/60;
-
-    document.querySelectorAll(".glass,.card").forEach(el=>{
-
-        el.style.transform += ` translate(${x}px,${y}px)`;
-
-    });
-
-});
-
-
-// =========================
-// TYPE EFFECT
-// =========================
-
-const title=document.querySelector(".title");
-
-const text=title.innerHTML;
-
-title.innerHTML="";
-
-let i=0;
-
-function typing(){
-
-    if(i<text.length){
-
-        title.innerHTML+=text.charAt(i);
-
-        i++;
-
-        setTimeout(typing,35);
+        playing = false;
 
     }
 
-}
-
-typing();
+});
 
 
 // =========================
-// GLOW EFFECT
+// LIGHT FOLLOW MOUSE
 // =========================
 
-document.querySelectorAll(".hover-glow").forEach(item=>{
+const light = document.querySelector(".light");
 
-    item.addEventListener("mousemove",(e)=>{
 
-        const rect=item.getBoundingClientRect();
+document.addEventListener("mousemove",(event)=>{
 
-        const x=e.clientX-rect.left;
+    const x = event.clientX;
+    const y = event.clientY;
 
-        const y=e.clientY-rect.top;
 
-        item.style.background=`radial-gradient(circle at ${x}px ${y}px,
-        rgba(255,255,255,.35),
-        transparent 65%)`;
-
-    });
-
-    item.addEventListener("mouseleave",()=>{
-
-        item.style.background="transparent";
-
-    });
+    light.style.transform = `
+        translate(
+        ${x - 275}px,
+        ${y - 275}px
+        )
+    `;
 
 });
 
 
 // =========================
-// SMOOTH APPEAR
+// REVEAL ON SCROLL
 // =========================
 
-window.addEventListener("load",()=>{
+const reveals = document.querySelectorAll(".reveal");
 
-    document.body.style.opacity="1";
+
+const revealObserver = new IntersectionObserver(
+(entries)=>{
+
+    entries.forEach(entry=>{
+
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("active");
+
+        }
+
+
+    });
+
+
+},
+{
+    threshold:0.25
+});
+
+
+reveals.forEach(section=>{
+
+    revealObserver.observe(section);
 
 });
+
+
+// =========================
+// HERO FADE ON SCROLL
+// =========================
+
+const hero = document.querySelector(".hero");
+
+
+window.addEventListener("scroll",()=>{
+
+
+    let scroll =
+    window.scrollY;
+
+
+    let opacity =
+    1 - scroll / 600;
+
+
+    if(opacity < 0){
+
+        opacity = 0;
+
+    }
+
+
+    hero.style.opacity = opacity;
+
+
+    hero.style.transform =
+    `
+    translateY(${scroll * 0.15}px)
+    `;
+
+
+});
+
+
+// =========================
+// SMOOTH SECTION TRANSITION
+// =========================
+
+const sections =
+document.querySelectorAll(
+".section, .ending"
+);
+
+
+sections.forEach(section=>{
+
+
+    section.style.transition =
+    "opacity 1s ease";
+
+
+});
+
+
+// =========================
+// MUSIC BUTTON PULSE
+// =========================
+
+setInterval(()=>{
+
+
+    if(playing){
+
+
+        musicButton.style.transform =
+        "scale(1.08)";
+
+
+        setTimeout(()=>{
+
+
+            musicButton.style.transform =
+            "scale(1)";
+
+
+        },400);
+
+
+    }
+
+
+},1200);

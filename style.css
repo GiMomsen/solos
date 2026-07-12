@@ -1,6 +1,6 @@
-/* ===========================
-        RESET
-=========================== */
+/* =========================
+   RESET
+========================= */
 
 *{
     margin:0;
@@ -14,312 +14,641 @@ html{
 
 body{
 
-    background:#050505;
-    color:white;
+    font-family:'Inter',sans-serif;
 
-    font-family:'Poppins',sans-serif;
+    background:#050505;
+
+    color:#fff;
 
     overflow-x:hidden;
 
 }
 
 
-/* ===========================
-      SCROLLBAR
-=========================== */
+/* =========================
+      BACKGROUND
+========================= */
 
-::-webkit-scrollbar{
-
-    width:8px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:#070707;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#ffffff33;
-    border-radius:20px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:#ffffff77;
-
-}
-
-
-/* ===========================
-      PARTICLES
-=========================== */
-
-#particles{
+.background{
 
     position:fixed;
 
-    width:100%;
-    height:100%;
+    inset:0;
 
-    left:0;
-    top:0;
-
-    overflow:hidden;
+    background:
+    radial-gradient(circle at top,#1d1d1d 0%,#050505 65%);
 
     z-index:-5;
 
 }
 
 
-/* ===========================
-      CUSTOM CURSOR
-=========================== */
+/* =========================
+        GRAIN
+========================= */
 
-.cursor{
-
-    width:18px;
-    height:18px;
-
-    border:2px solid white;
-
-    border-radius:50%;
+.grain{
 
     position:fixed;
 
+    inset:0;
+
+    opacity:.04;
+
+    background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+
     pointer-events:none;
+
+    z-index:-4;
+
+}
+
+
+/* =========================
+      LIGHT FOLLOW
+========================= */
+
+.light{
+
+    position:fixed;
+
+    width:550px;
+
+    height:550px;
+
+    border-radius:50%;
+
+    background:radial-gradient(circle,
+    rgba(255,255,255,.08),
+    transparent 70%);
+
+    pointer-events:none;
+
+    left:50%;
+
+    top:50%;
 
     transform:translate(-50%,-50%);
 
     transition:
+    transform .08s linear;
 
-        width .25s,
-        height .25s,
-        background .25s,
-        border .25s;
-
-    z-index:999999;
-
-}
-
-.cursor.active{
-
-    width:40px;
-    height:40px;
-
-    background:#ffffff15;
+    z-index:-3;
 
 }
 
 
-/* ===========================
+/* =========================
+       MUSIC BUTTON
+========================= */
+
+#musicButton{
+
+    position:fixed;
+
+    right:45px;
+
+    top:35px;
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    background:rgba(255,255,255,.03);
+
+    color:white;
+
+    cursor:pointer;
+
+    backdrop-filter:blur(18px);
+
+    transition:.35s;
+
+    font-size:20px;
+
+    z-index:999;
+
+}
+
+#musicButton:hover{
+
+    transform:scale(1.12);
+
+    background:white;
+
+    color:black;
+
+}
+
+
+/* =========================
           HERO
-=========================== */
+========================= */
 
 .hero{
 
-    width:100%;
     height:100vh;
 
     display:flex;
 
+    flex-direction:column;
+
     justify-content:center;
-    align-items:center;
 
-    padding:30px;
+    padding-left:11vw;
 
-}
-
-
-/* ===========================
-        GLASS
-=========================== */
-
-.glass{
-
-    width:850px;
-
-    padding:80px;
-
-    border-radius:25px;
-
-    background:rgba(255,255,255,.05);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    backdrop-filter:blur(18px);
-
-    transition:.5s;
+    max-width:900px;
 
 }
 
-.glass:hover{
+.small{
 
-    transform:
-
-        translateY(-6px)
-        scale(1.01);
-
-    box-shadow:
-
-        0 0 50px rgba(255,255,255,.08);
-
-}
-
-
-/* ===========================
-         TITLES
-=========================== */
-
-.title{
-
-    font-size:58px;
-
-    line-height:1.25;
-
-    font-weight:500;
-
-    letter-spacing:-2px;
-
-    margin-top:18px;
-
-    transition:.4s;
-
-}
-
-.mini{
-
-    text-transform:uppercase;
+    color:#8e8e8e;
 
     letter-spacing:7px;
 
-    color:#bdbdbd;
+    text-transform:uppercase;
+
+    font-size:11px;
+
+    margin-bottom:28px;
+
+}
+
+.hero h1{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(60px,8vw,115px);
+
+    font-weight:400;
+
+    line-height:1;
+
+    letter-spacing:-3px;
+
+}
+
+.scroll{
+
+    margin-top:90px;
+
+    color:#666;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
 
     font-size:12px;
 
 }
 
 
-/* ===========================
-         BUTTON
-=========================== */
+/* =========================
+        SECTIONS
+========================= */
 
-button{
-
-    margin-top:60px;
-
-    padding:16px 42px;
-
-    background:transparent;
-
-    color:white;
-
-    border:1px solid rgba(255,255,255,.2);
-
-    border-radius:100px;
-
-    cursor:pointer;
-
-    font-size:15px;
-
-    transition:.35s;
-
-}
-
-button:hover{
-
-    transform:
-
-        translateY(-3px)
-        scale(1.05);
-
-    background:white;
-
-    color:black;
-
-    box-shadow:
-
-        0 0 40px rgba(255,255,255,.4);
-
-}
-
-
-/* ===========================
-         PANELS
-=========================== */
-
-.panel{
+.section{
 
     min-height:100vh;
 
     display:flex;
 
+    align-items:center;
+
+    justify-content:center;
+
+    padding:0 8vw;
+
+}
+
+.text{
+
+    width:900px;
+
+}
+
+.number{
+
+    color:#444;
+
+    font-size:14px;
+
+    letter-spacing:4px;
+
+    margin-bottom:25px;
+
+}
+
+.text h2{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(50px,6vw,90px);
+
+    font-weight:400;
+
+    line-height:1;
+
+    margin-bottom:25px;
+
+}
+
+.text p{
+
+    color:#b8b8b8;
+
+    font-size:22px;
+
+    line-height:1.8;
+
+}
+
+
+/* =========================
+          FINAL
+========================= */
+
+.ending{
+
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
     justify-content:center;
 
     align-items:center;
 
-    padding:90px 20px;
+}
+
+.line{
+
+    width:220px;
+
+    height:1px;
+
+    background:#444;
+
+    margin-bottom:35px;
+
+}
+
+.ending p{
+
+    color:#666;
+
+    letter-spacing:4px;
+
+    margin-bottom:45px;
+
+}
+
+.ending h2{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:70px;
+
+    font-weight:400;
+
+    text-align:center;
+
+    line-height:1.1;
 
 }
 
 
-/* ===========================
-          CARD
-=========================== */
+/* =========================
+      ANIMAÇÕES
+========================= */
 
-.card{
+.reveal{
 
-    width:760px;
+    opacity:0;
 
-    background:rgba(255,255,255,.03);
+    transform:translateY(80px);
 
-    backdrop-filter:blur(20px);
+    transition:1.2s ease;
 
-    border-radius:25px;
+}
 
-    border:1px solid rgba(255,255,255,.08);
+.reveal.active{
 
-    padding:70px;
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+/* =========================
+        HOVER
+========================= */
+
+h1,h2{
 
     transition:.45s;
 
-    transform-style:preserve-3d;
+}
+
+h1:hover,
+h2:hover{
+
+    color:#ffffff;
+
+    letter-spacing:1px;
 
 }
 
-.card:hover{
+.text p{
 
-    transform:
-
-        rotateX(6deg)
-        rotateY(-6deg)
-        scale(1.02);
-
-    box-shadow:
-
-        0 25px 80px rgba(255,255,255,.08);
+    transition:.35s;
 
 }
 
-.card h2{
+.text p:hover{
 
-    font-size:42px;
-
-    margin-bottom:25px;
-
-    font-weight:500;
+    color:white;
 
 }
 
-.card p{
 
-    color:#bdbdbd;
+/* =========================
+     RESPONSIVO
+========================= */
 
-    line-height:1.9;
+@media(max-width:900px){
 
-    font-size:20px;
+.hero{
+
+padding:40px;
+
+}
+
+.hero h1{
+
+font-size:62px;
+
+}
+
+.text h2{
+
+font-size:52px;
+
+}
+
+.text p{
+
+font-size:18px;
+
+}
+
+.ending h2{
+
+font-size:50px;
+
+}
+
+}
+
+/* =========================
+   EXTRA EFFECTS - PART 2
+========================= */
+
+
+/* Fade inicial suave */
+
+body{
+
+    opacity:1;
+
+    transition:opacity 1.5s ease;
+
+}
+
+
+/* =========================
+   HERO CINEMATIC EFFECT
+========================= */
+
+.hero h1{
+
+    animation:fadeTitle 2s ease forwards;
+
+}
+
+
+.small{
+
+    animation:fadeSmall 2s ease forwards;
+
+}
+
+
+.scroll{
+
+    animation:
+    fadeSmall 2.5s ease forwards,
+    floatScroll 3s ease-in-out infinite;
+
+}
+
+
+@keyframes fadeTitle{
+
+    from{
+
+        opacity:0;
+
+        filter:blur(12px);
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        filter:blur(0);
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+@keyframes fadeSmall{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+
+@keyframes floatScroll{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(10px);
+
+    }
+
+}
+
+
+
+/* =========================
+      TEXTO ELEGANTE
+========================= */
+
+
+.text h2{
+
+    max-width:850px;
+
+}
+
+
+.text p:last-child{
+
+    max-width:450px;
+
+}
+
+
+/* =========================
+      LUZ MAIS SUAVE
+========================= */
+
+
+.light{
+
+    mix-blend-mode:screen;
+
+}
+
+
+/* =========================
+       MUSIC BUTTON ANIMATION
+========================= */
+
+
+#musicButton::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-8px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    opacity:0;
+
+    transition:.5s;
+
+}
+
+
+#musicButton:hover::after{
+
+    opacity:1;
+
+    transform:scale(1.2);
+
+}
+
+
+/* =========================
+       SEPARADORES
+========================= */
+
+
+.section::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:1px;
+
+    height:120px;
+
+    background:linear-gradient(
+        transparent,
+        rgba(255,255,255,.2),
+        transparent
+    );
+
+}
+
+
+
+/* =========================
+      MOBILE AJUSTES
+========================= */
+
+
+@media(max-width:600px){
+
+
+    #musicButton{
+
+        right:20px;
+
+        top:20px;
+
+        width:45px;
+
+        height:45px;
+
+    }
+
+
+    .hero{
+
+        justify-content:center;
+
+    }
+
+
+    .hero h1{
+
+        letter-spacing:-1px;
+
+    }
+
+
+    .scroll{
+
+        margin-top:50px;
+
+    }
+
 
 }
