@@ -1,0 +1,325 @@
+/* ===========================
+        RESET
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    background:#050505;
+    color:white;
+
+    font-family:'Poppins',sans-serif;
+
+    overflow-x:hidden;
+
+}
+
+
+/* ===========================
+      SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#070707;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#ffffff33;
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#ffffff77;
+
+}
+
+
+/* ===========================
+      PARTICLES
+=========================== */
+
+#particles{
+
+    position:fixed;
+
+    width:100%;
+    height:100%;
+
+    left:0;
+    top:0;
+
+    overflow:hidden;
+
+    z-index:-5;
+
+}
+
+
+/* ===========================
+      CUSTOM CURSOR
+=========================== */
+
+.cursor{
+
+    width:18px;
+    height:18px;
+
+    border:2px solid white;
+
+    border-radius:50%;
+
+    position:fixed;
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    transition:
+
+        width .25s,
+        height .25s,
+        background .25s,
+        border .25s;
+
+    z-index:999999;
+
+}
+
+.cursor.active{
+
+    width:40px;
+    height:40px;
+
+    background:#ffffff15;
+
+}
+
+
+/* ===========================
+          HERO
+=========================== */
+
+.hero{
+
+    width:100%;
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:30px;
+
+}
+
+
+/* ===========================
+        GLASS
+=========================== */
+
+.glass{
+
+    width:850px;
+
+    padding:80px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    transition:.5s;
+
+}
+
+.glass:hover{
+
+    transform:
+
+        translateY(-6px)
+        scale(1.01);
+
+    box-shadow:
+
+        0 0 50px rgba(255,255,255,.08);
+
+}
+
+
+/* ===========================
+         TITLES
+=========================== */
+
+.title{
+
+    font-size:58px;
+
+    line-height:1.25;
+
+    font-weight:500;
+
+    letter-spacing:-2px;
+
+    margin-top:18px;
+
+    transition:.4s;
+
+}
+
+.mini{
+
+    text-transform:uppercase;
+
+    letter-spacing:7px;
+
+    color:#bdbdbd;
+
+    font-size:12px;
+
+}
+
+
+/* ===========================
+         BUTTON
+=========================== */
+
+button{
+
+    margin-top:60px;
+
+    padding:16px 42px;
+
+    background:transparent;
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.2);
+
+    border-radius:100px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.35s;
+
+}
+
+button:hover{
+
+    transform:
+
+        translateY(-3px)
+        scale(1.05);
+
+    background:white;
+
+    color:black;
+
+    box-shadow:
+
+        0 0 40px rgba(255,255,255,.4);
+
+}
+
+
+/* ===========================
+         PANELS
+=========================== */
+
+.panel{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:90px 20px;
+
+}
+
+
+/* ===========================
+          CARD
+=========================== */
+
+.card{
+
+    width:760px;
+
+    background:rgba(255,255,255,.03);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:25px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    padding:70px;
+
+    transition:.45s;
+
+    transform-style:preserve-3d;
+
+}
+
+.card:hover{
+
+    transform:
+
+        rotateX(6deg)
+        rotateY(-6deg)
+        scale(1.02);
+
+    box-shadow:
+
+        0 25px 80px rgba(255,255,255,.08);
+
+}
+
+.card h2{
+
+    font-size:42px;
+
+    margin-bottom:25px;
+
+    font-weight:500;
+
+}
+
+.card p{
+
+    color:#bdbdbd;
+
+    line-height:1.9;
+
+    font-size:20px;
+
+}
