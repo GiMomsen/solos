@@ -1,193 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Solo</title>
-
+    
     <link rel="stylesheet" href="style.css">
-
+    
     <!-- Fonts -->
-
-    <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-    <!-- Background -->
-
+    <!-- Ambient Elements -->
     <div class="background"></div>
-
     <div class="grain"></div>
+    <div class="light" id="cursorLight"></div>
 
-    <div class="light"></div>
-
-    <!-- Music -->
-
-    <button id="musicButton">
-
-        ♫
-
-    </button>
-
+    <!-- Music Control -->
+    <button id="musicButton" aria-label="Play music">♫</button>
     <audio id="music" loop>
-
-        <source src="assets/guitar.mp3">
-
+        <source src="assets/guitar.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Hero -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <p class="small">for someone who became my favorite solo.</p>
+                <h1>You're the solo that lives in my head long after the song ends.</h1>
+                <span class="scroll">scroll down</span>
+            </div>
+        </section>
 
-    <section class="hero">
+        <!-- Chapter 1 -->
+        <section class="section reveal">
+            <div class="text">
+                <p class="number">01</p>
+                <h2>Some people are songs.</h2>
+                <p>You're the part I keep replaying.</p>
+            </div>
+        </section>
 
-        <p class="small">
+        <!-- Chapter 2 -->
+        <section class="section reveal">
+            <div class="text">
+                <p class="number">02</p>
+                <h2>Not because it's loud.</h2>
+                <p>Because it never leaves.</p>
+            </div>
+        </section>
 
-            for someone who became
-            my favorite solo.
+        <!-- Chapter 3 -->
+        <section class="section reveal">
+            <div class="text">
+                <p class="number">03</p>
+                <h2>Some solos last thirty seconds.</h2>
+                <p>Some never really end.</p>
+            </div>
+        </section>
 
-        </p>
-
-        <h1>
-
-            You're the solo
-            that lives in my head
-            long after
-            the song ends.
-
-        </h1>
-
-        <span class="scroll">
-
-            scroll
-
-        </span>
-
-    </section>
-
-    <!-- SECTION -->
-
-    <section class="section reveal">
-
-        <div class="text">
-
-            <p class="number">
-
-                01
-
-            </p>
-
-            <h2>
-
-                Some people are songs.
-
-            </h2>
-
-            <p>
-
-                You're the part
-                I keep replaying.
-
-            </p>
-
-        </div>
-
-    </section>
-
-    <!-- SECTION -->
-
-    <section class="section reveal">
-
-        <div class="text">
-
-            <p class="number">
-
-                02
-
-            </p>
-
-            <h2>
-
-                Not because
-                it's loud.
-
-            </h2>
-
-            <p>
-
-                Because it never leaves.
-
-            </p>
-
-        </div>
-
-    </section>
-
-    <!-- SECTION -->
-
-    <section class="section reveal">
-
-        <div class="text">
-
-            <p class="number">
-
-                03
-
-            </p>
-
-            <h2>
-
-                Some solos last
-                thirty seconds.
-
-            </h2>
-
-            <p>
-
-                Some never really end.
-
-            </p>
-
-        </div>
-
-    </section>
-
-    <!-- FINAL -->
-
-    <section class="ending">
-
-        <div class="line"></div>
-
-        <p>
-
-            00:00 ─────────────── 06:21
-
-        </p>
-
-        <h2>
-
-            See you
-            in the next song.
-
-        </h2>
-
-    </section>
+        <!-- Outro -->
+        <section class="ending reveal">
+            <div class="line"></div>
+            <p class="timestamp">00:00 <span class="progress-bar"></span> 06:21</p>
+            <h2>See you<br>in the next song.</h2>
+        </section>
+    </main>
 
     <script src="script.js"></script>
-
 </body>
-
 </html>
